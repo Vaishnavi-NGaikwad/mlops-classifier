@@ -1,0 +1,10 @@
+﻿venv/
+__pycache__/
+*.pyc
+model/*.pt
+model/*.h5
+model/*.keras
+*.jpg
+*.png
+mlruns/
+.dvc/cache
