@@ -1,0 +1,7 @@
+﻿flask==3.1.2
+torch==2.10.0
+torchvision==0.25.0
+pillow==12.1.0
+numpy==2.4.2
+werkzeug==3.1.5
+gunicorn==23.0.0

@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  classifier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pet-classifier
+    container_name: classifier
+    ports:
+      - "5000:5000"
+    gpus: all
+    volumes:
+      - D:\Vaish\mlops-image-classifier\model:/app/models
+    stdin_open: true
+    tty: true
+    restart: unless-stopped

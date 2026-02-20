@@ -1,0 +1,7 @@
+powershellcd D:\Projects\mlops-image-classifier
+
+docker build -t pet-classifier .
+
+docker run -p 5000:5000 pet-classifier
+
+docker run --gpus all -p 5000:5000 pet-classifier
