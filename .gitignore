@@ -1,10 +1,15 @@
 # ML models
-model/
+# Ignore actual model binaries
 *.pt
 *.pth
 *.ckpt
 *.onnx
 *.h5
+
+# Ignore model directory contents BUT allow DVC pointer files
+model/*
+!model/*.dvc
+!model/.gitignore
 
 # MLflow
 mlflow.db
