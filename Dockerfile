@@ -9,7 +9,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 COPY templates/ templates/
 COPY static/ static/
-COPY model/simple_cnn_baseline_exp1_20260217_053749_best.pt model/simple_cnn_baseline_exp1_20260217_053749_best.pt
+
+RUN apt-get update && apt-get install -y wget && \
+    mkdir -p model && \
+    wget https://github.com/Vaishnavi-NGaikwad/mlops-classifier/releases/download/v1.0/simple_cnn_baseline_exp1_20260217_053749_best.pt \
+    -O model/simple_cnn_baseline_exp1_20260217_053749_best.pt && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5000
 

@@ -1,5 +1,0 @@
-outs:
-- md5: 6050cee91099d128d80d173507ac4c0d
-  size: 313758447
-  hash: md5
-  path: simple_cnn_baseline_exp1_20260217_053749_best.pt
