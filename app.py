@@ -56,7 +56,7 @@ class SimpleCNN(nn.Module):
 
 # Load model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-MODEL_PATH = 'model\\simple_cnn_baseline_exp1_20260217_053749_best.pt'  # CHANGE THIS
+MODEL_PATH = 'model/simple_cnn_baseline_exp1_20260217_053749_best.pt'  # CHANGE THIS
 
 try:
     model = SimpleCNN(num_classes=1)

@@ -1,18 +1,31 @@
 #!/bin/bash
 # Smoke Test Script - M4 Post-Deploy Verification
-# Tests health endpoint and prediction endpoint after deployment
-
-set -e
 
 BASE_URL="http://localhost:5000"
 PASS=0
 FAIL=0
 
+echo "============================================"
 echo "  Smoke Tests - Pet Classifier Service"
+echo "============================================"
 
-# Wait for service to be ready
-echo "Waiting for service to start..."
-sleep 100
+# Wait for service to be ready - retry until health returns 200
+echo "Waiting for service to be ready..."
+MAX_WAIT=300  # max 5 minutes
+INTERVAL=10
+ELAPSED=0
+
+until [ "$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/health")" -eq 200 ]; do
+    if [ "$ELAPSED" -ge "$MAX_WAIT" ]; then
+        echo "ERROR: Service did not become ready after ${MAX_WAIT}s. Exiting."
+        exit 1
+    fi
+    echo "Service not ready yet (${ELAPSED}s elapsed)... retrying in ${INTERVAL}s"
+    sleep $INTERVAL
+    ELAPSED=$((ELAPSED + INTERVAL))
+done
+
+echo "Service is ready after ${ELAPSED}s!"
 
 # ─────────────────────────────────────────────
 # TEST 1: Health Check
@@ -47,7 +60,7 @@ else
 fi
 
 # ─────────────────────────────────────────────
-# TEST 3: Prediction Endpoint (with dummy image)
+# TEST 3: Prediction Endpoint
 # ─────────────────────────────────────────────
 echo ""
 echo "[TEST 3] Prediction Endpoint..."
@@ -74,7 +87,7 @@ else
 fi
 
 # ─────────────────────────────────────────────
-# TEST 4: Prediction Response has expected fields
+# TEST 4: Prediction Response Fields
 # ─────────────────────────────────────────────
 echo ""
 echo "[TEST 4] Prediction response contains required fields..."
@@ -92,7 +105,10 @@ else
     FAIL=$((FAIL + 1))
 fi
 
-
+# ─────────────────────────────────────────────
+# SUMMARY
+# ─────────────────────────────────────────────
+echo ""
 echo "============================================"
 echo "  Smoke Test Results"
 echo "============================================"
