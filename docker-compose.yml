@@ -1,6 +1,6 @@
 services:
   mlops-classifier:
-    image: vaishnavi06/mlops-classifier:latest
+    image: vaishnavig06/mlops-classifier:latest
     pull_policy: never
     container_name: pet-classifier
     ports:
