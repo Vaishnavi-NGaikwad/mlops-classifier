@@ -12,7 +12,7 @@ echo "  Smoke Tests - Pet Classifier Service"
 
 # Wait for service to be ready
 echo "Waiting for service to start..."
-sleep 10
+sleep 100
 
 # ─────────────────────────────────────────────
 # TEST 1: Health Check
