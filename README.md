@@ -222,3 +222,4 @@ Image available at: `vaishnavi06/mlops-classifier:latest`
 docker pull vaishnavi06/mlops-classifier:latest
 ```
 
+---
